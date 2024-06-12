@@ -5,25 +5,20 @@
   "main": "index.js",
   "author": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
   },
   "license": "ISC",
   "devDependencies": {
-    "cross-env": "^7.0.3",
-    "husky": "^9.0.11",
-    "commitlint": "^19.3.0",
-    "@commitlint/cli": "^8.3.4",
+    "@commitlint/cli": "^8.3.6",
     "@commitlint/config-conventional": "^8.3.4",
     "commitizen": "^4.0.3",
-    "cz-conventional-changelog": "3.0.2",
+    "commitlint": "^19.3.0",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.0.2",
+    "husky": "^9.0.11",
     "lint-staged": "^9.5.0"
-  },
-  "dependencies": {
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-    }
   },
   "config": {
     "commitizen": {
