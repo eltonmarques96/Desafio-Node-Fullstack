@@ -19,7 +19,6 @@
     "lint-staged": "^9.5.0"
   },
   "dependencies": {
-
   },
   "husky": {
     "hooks": {
