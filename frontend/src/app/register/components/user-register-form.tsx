@@ -36,16 +36,6 @@ export function UserRegisterForm({ className, ...props }: UserAuthFormProps) {
  
   const { errors, touched, values, handleChange, handleSubmit } = formik;
 
-
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault()
-    setIsLoading(true)
-    alert("Hello World")
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
-  }
-
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={handleSubmit}>

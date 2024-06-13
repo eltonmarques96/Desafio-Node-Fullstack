@@ -1,7 +1,8 @@
 "use client"
 
 import * as React from "react"
-
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/ui/icons"
 import { Button } from "@/components/ui/button"
@@ -13,18 +14,27 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault()
-    setIsLoading(true)
+  const schema = yup.object().shape({
+    email:yup.string().required('Email is required').email('Invalid email'),
+    password:yup.string().required('Password is required'),
+  })
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
-  }
+  const formik = useFormik({
+  initialValues: {
+    email: "",
+    password: "",
+  },
+  validationSchema: schema,
+  onSubmit: async (values) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  },
+});
+
+const { errors, touched, values, handleChange, handleSubmit } = formik;
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="grid gap-2">
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="email">
@@ -38,6 +48,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoComplete="email"
               autoCorrect="off"
               disabled={isLoading}
+              value={values.email}
+              onChange={handleChange}
             />
             <Label className="sr-only" htmlFor="email">
               Password
@@ -49,6 +61,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoCapitalize="none"
               autoCorrect="off"
               disabled={isLoading}
+              value={values.password}
+              onChange={handleChange}
             />
           </div>
           <Button disabled={isLoading}>
