@@ -1,8 +1,11 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
+import { CreateUserUseCase } from './useCases/createUserUseCase';
+import { User } from '@prisma/client';
+import { CreateUserBody } from './dto/userBody';
 
 @Controller('user')
 export class UserController {
-  constructor() {}
+  constructor(private createUserUseCase: CreateUserUseCase) {}
 
   // @Get()
   // async getUsers(): Promise<User[]> {
@@ -14,10 +17,16 @@ export class UserController {
   //   return await this.userService.getUser(id);
   // }
 
-  // @Post()
-  // async addUser(@Body() user: User): Promise<User[]> {
-  //   return await this.userService.addUser(user);
-  // }
+  @Post()
+  async creeateUser(@Body() body: CreateUserBody): Promise<User> {
+    const { email, password, fullName } = body;
+    const user = await this.createUserUseCase.execute({
+      email,
+      password,
+      fullName,
+    });
+    return user;
+  }
 
   // @Put(':id')
   // async replaceUser(
