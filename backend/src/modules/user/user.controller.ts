@@ -20,11 +20,13 @@ export class UserController {
   @Post()
   async creeateUser(@Body() body: CreateUserBody): Promise<User> {
     const { email, password, fullName } = body;
+    const emailCheck = await
     const user = await this.createUserUseCase.execute({
       email,
       password,
       fullName,
     });
+    user.password = '';
     return user;
   }
 
