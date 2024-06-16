@@ -42,11 +42,11 @@ export function UserRegisterForm({ className, ...props }: UserAuthFormProps) {
         <div className="grid gap-2">
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="user-name">
-              User Name
+              Username
             </Label>
             <Input
               id="user-name"
-              placeholder="YourUuser Name"
+              placeholder="Your username"
               type="text"
               autoCapitalize="none"
               autoComplete="user-name"
