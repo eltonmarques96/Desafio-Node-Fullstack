@@ -15,7 +15,7 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 export function UserRegisterForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const schema = yup.object().shape({
-      fullName:yup.string().required('Insert your name'),
+      username:yup.string().required('Insert your username'),
       email:yup.string().required('Email is required').email('Invalid email'),
       password:yup.string().required('Password is required'),
       passwordconfirmation:yup.string().required('Password Confirmation is required')
@@ -23,7 +23,7 @@ export function UserRegisterForm({ className, ...props }: UserAuthFormProps) {
 
     const formik = useFormik({
     initialValues: {
-      fullName: "",
+      username: "",
       email: "",
       password: "",
       passwordconfirmation: "",
@@ -41,21 +41,21 @@ export function UserRegisterForm({ className, ...props }: UserAuthFormProps) {
       <form onSubmit={handleSubmit}>
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="full-name">
-              Full Name
+            <Label className="sr-only" htmlFor="user-name">
+              User Name
             </Label>
             <Input
-              id="full-name"
-              placeholder="Your Full Name"
-              type="email"
+              id="user-name"
+              placeholder="YourUuser Name"
+              type="text"
               autoCapitalize="none"
-              autoComplete="full-name"
+              autoComplete="user-name"
               autoCorrect="off"
               disabled={isLoading}
-              value={values.fullName}
+              value={values.username}
               onChange={handleChange}
             />
-            {touched.fullName && errors.fullName && <div>{errors.fullName}</div>}
+            {touched.username && errors.username && <div>{errors.username}</div>}
             <Label className="sr-only" htmlFor="email">
               Email
             </Label>

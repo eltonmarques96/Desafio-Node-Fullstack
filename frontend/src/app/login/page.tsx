@@ -49,7 +49,7 @@ export default function AuthenticationPage() {
                 Login
               </h1>
               <p className="text-sm text-muted-foreground">
-                Enter your email and your pasword
+                Enter your email and your password
               </p>
             </div>
             <UserAuthForm />
