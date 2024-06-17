@@ -33,46 +33,48 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 const { errors, touched, values, handleChange, handleSubmit } = formik;
 
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={handleSubmit}>
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Email
-            </Label>
-            <Input
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              disabled={isLoading}
-              value={values.email}
-              onChange={handleChange}
-            />
-            <Label className="sr-only" htmlFor="email">
-              Password
-            </Label>
-            <Input
-              id="password"
-              placeholder="your password"
-              type="password"
-              autoCapitalize="none"
-              autoCorrect="off"
-              disabled={isLoading}
-              value={values.password}
-              onChange={handleChange}
-            />
+    <>
+      <div className={cn("grid gap-6", className)} {...props}>
+        <form onSubmit={handleSubmit}>
+          <div className="grid gap-2">
+            <div className="grid gap-1">
+              <Label className="" htmlFor="email">
+                Email
+              </Label>
+              <Input
+                id="email"
+                placeholder="name@example.com"
+                type="email"
+                autoCapitalize="none"
+                autoComplete="email"
+                autoCorrect="off"
+                disabled={isLoading}
+                value={values.email}
+                onChange={handleChange}
+              />
+              <Label className="" htmlFor="email">
+                Password
+              </Label>
+              <Input
+                id="password"
+                placeholder="your password"
+                type="password"
+                autoCapitalize="none"
+                autoCorrect="off"
+                disabled={isLoading}
+                value={values.password}
+                onChange={handleChange}
+              />
+            </div>
+            <Button disabled={isLoading} type='submit'>
+              {isLoading && (
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              Sign In with Email
+            </Button>
           </div>
-          <Button disabled={isLoading}>
-            {isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            Sign In with Email
-          </Button>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   )
 }
