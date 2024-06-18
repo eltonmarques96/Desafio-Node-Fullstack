@@ -8,6 +8,9 @@ import { Icons } from "@/components/ui/icons"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { toast } from "@/components/ui/use-toast";
+import api from "@/services/httpRequest";
+import md5 from "md5";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -26,6 +29,29 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   },
   validationSchema: schema,
   onSubmit: async (values) => {
+    try {
+      setIsLoading(true)
+      const response = await api.post("/users/login", {
+        email: values.email,
+        password: md5(values.password),
+      })
+      if(response.status === 200){
+        toast({
+          description: "Seja bem vindo",
+        })
+      }
+      else{
+        throw new Error(response.data)
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        description: "Erro ao realizar login",
+      })
+    }
+    finally {
+      setIsLoading(false)
+    }
     await new Promise((resolve) => setTimeout(resolve, 1000));
   },
 });

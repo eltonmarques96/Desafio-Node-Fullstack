@@ -11,7 +11,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import api from "@/services/httpRequest"
 import md5 from 'md5'
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast" 
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -22,7 +22,7 @@ export function UserRegisterForm({ className, ...props }: UserAuthFormProps) {
   const schema = yup.object().shape({
       username:yup.string().required('Insert your username'),
       email:yup.string().required('Email is required').email('Invalid email'),
-      password:yup.string().required('Password is required'),
+      password:yup.string().required('Password is required'), 
       passwordconfirmation:yup.string().required('Password Confirmation is required').oneOf([yup.ref('password')], 'Passwords must match')
     })
 
