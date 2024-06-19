@@ -30,8 +30,8 @@ public static class UserController
 
         userRoutes.MapPost(pattern: "/login", handler: async (LoginRequestDTO request, AppDbContext context, CancellationToken ct) =>
         {
-            var userInDb = await context.Users.FirstOrDefaultAsync(u => u.Email == request.Email, ct);
-            if (userInDb is null || !BCrypt.Net.BCrypt.Verify(request.Password, userInDb.Password)) ;
+            var userInDb = await context.Users.FirstOrDefaultAsync(u => u.Email == request.email, ct);
+            if (userInDb is null || !BCrypt.Net.BCrypt.Verify(request.password, userInDb.Password))
             {
                 return Results.NotFound(new { message = "User or password is incorrect" });
             };

@@ -12,12 +12,14 @@ import * as yup from 'yup';
 import api from "@/services/httpRequest"
 import md5 from 'md5'
 import { useToast } from "@/components/ui/use-toast" 
+import { useRouter } from 'next/navigation';
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserRegisterForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const { toast } = useToast();
+  const router = useRouter();
 
   const schema = yup.object().shape({
       username:yup.string().required('Insert your username'),
@@ -47,6 +49,7 @@ export function UserRegisterForm({ className, ...props }: UserAuthFormProps) {
           toast({
             description: "Usuário Criado com Sucesso",
           })
+          router.push("/login")
         }
         else if (response.status === 409){
           toast({
