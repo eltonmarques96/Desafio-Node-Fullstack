@@ -1,5 +1,5 @@
 import { useUser } from './useUser';
-import { AuthResponse, TLogin } from '@/utils/types/auth';
+import { AuthResponse, AuthUser, TLogin } from '@/utils/types/auth';
 import useCookie from './useCookie';
 import api from '@/services/httpRequest';
 
@@ -26,9 +26,22 @@ export const useAuth = () => {
         return await api
             .post('/users/login', creds)
             .then((res) => {
-                if (res.data?.data && res.data.data?.token)
-                    addUser(res.data.data);
-                return res.data as AuthResponse;
+                if (res.data && res.data?.token) {
+                    const data: AuthUser = {
+                        token: res.data.token,
+                        user: {
+                            id: res.data.token,
+                            email: res.data.email,
+                            username: res.data.username,
+                        },
+                    };
+                    addUser(data);
+                    return {
+                        ...res.data,
+                        success: true,
+                        message: 'Welcome',
+                    } as AuthResponse;
+                }
             })
             .catch((err) => {
                 if (err && err?.response && err.response?.data)

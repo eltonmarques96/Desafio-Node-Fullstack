@@ -12,15 +12,11 @@ import {
     DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-    NavigationMenuLink,
-    navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
 import { useAuth } from '@/hooks/useAuth';
-import { Link } from 'lucide-react';
 
 export function UserNav() {
-    const { logout } = useAuth();
+    const { logout, user } = useAuth();
+    const userSlug = user?.user.username.substring(0, 2).toUpperCase();
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -30,7 +26,7 @@ export function UserNav() {
                 >
                     <Avatar className="h-8 w-8">
                         <AvatarImage src="/avatars/01.png" alt="@shadcn" />
-                        <AvatarFallback>US</AvatarFallback>
+                        <AvatarFallback>{userSlug}</AvatarFallback>
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>
@@ -38,10 +34,10 @@ export function UserNav() {
                 <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">
-                            username
+                            {user?.user.username}
                         </p>
                         <p className="text-xs leading-none text-muted-foreground">
-                            email@email.com
+                            {user?.user.email}
                         </p>
                     </div>
                 </DropdownMenuLabel>

@@ -16,7 +16,9 @@ export default function Header() {
     return (
         <>
             <MainNav className="mx-6" />
-            <UserNav />
+            <div className="ml-auto flex items-center space-x-4">
+                <UserNav />
+            </div>
         </>
     );
 }

@@ -1,28 +1,27 @@
-
 export type TUser = {
+    id: string;
     email: string;
-    firstName: string;
-    lastName: string;
-  };
-  
+    username: string;
+};
+
 export type TRegister = {
     email: string;
     username: string;
     password: string;
-  };
-  
-  export type AuthUser = {
+};
+
+export type AuthUser = {
     token: string;
     user: TUser;
-  };
-  
-  export type TLogin = {
+};
+
+export type TLogin = {
     email: string;
     password: string;
-  };
-  
-  export type AuthResponse = {
+};
+
+export type AuthResponse = {
     message: string;
     data?: AuthUser;
     success?: boolean;
-  };
+};

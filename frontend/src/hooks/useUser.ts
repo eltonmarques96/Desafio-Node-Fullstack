@@ -9,14 +9,14 @@ export const useUser = () => {
     const { user, setUser } = useContext(AuthContext);
     const { setCookie, removeCookie } = useCookie();
 
-    const addUser = (user: AuthUser) => {
-        setUser(user);
-        setCookie('user', JSON.stringify(user));
+    const addUser = (newUser: AuthUser) => {
+        setUser(newUser);
+        setCookie('desafio-elton-token', JSON.stringify(newUser));
     };
 
     const removeUser = () => {
         setUser(null);
-        removeCookie('user');
+        removeCookie('desafio-elton-token');
     };
 
     return { user, addUser, removeUser };

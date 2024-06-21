@@ -42,8 +42,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                     email: values.email,
                     password: md5(values.password),
                 };
-                await loginAPICall(signInValues);
-                router.push('/dashboard');
+                const apiReturn = await loginAPICall(signInValues);
+                if (apiReturn?.success == true) {
+                    router.push('/dashboard');
+                } else {
+                    throw new Error();
+                }
             } catch (error) {
                 toast({
                     variant: 'destructive',

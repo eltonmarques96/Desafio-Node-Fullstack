@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: Props) => {
         if (!user) {
             let existingUser = null;
             const getFromCookie = async () =>
-                (existingUser = getCookie('user'));
+                (existingUser = getCookie('desafio-elton-token'));
             getFromCookie();
 
             if (existingUser) {
